@@ -1,9 +1,27 @@
 @import "tailwindcss";
 
-/* En liten “pop”-animasjon for kortene */
+/* Flip 3D */
+.card-scene {
+  perspective: 1000px;
+}
+.card-3d {
+  transform-style: preserve-3d;
+  transition: transform 400ms ease;
+}
+.card-3d.is-flipped {
+  transform: rotateY(180deg);
+}
+.card-face {
+  backface-visibility: hidden;
+}
+.card-back {
+  transform: rotateY(180deg);
+}
+
+/* Pop-in for deal */
 @keyframes pop-in {
   0% {
-    transform: scale(0.9) translateY(8px);
+    transform: scale(0.96) translateY(4px);
     opacity: 0;
   }
   100% {
@@ -12,5 +30,5 @@
   }
 }
 .animate-pop-in {
-  animation: pop-in 180ms ease-out both;
+  animation: pop-in 160ms ease-out both;
 }
