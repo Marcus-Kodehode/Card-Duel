@@ -1,5 +1,10 @@
 <div align="center">
-  
+  <p>
+    <img src="/public/images/MBlogo.png" alt="Personal Logo" width="150" />
+  </p>
+  <p>
+    <img src="/public/images/logo.png" alt="Card Dual Logo" width="150" />
+  </p>
   # Card Duel
   
   > A sleek and modern card game built with Next.js and Tailwind CSS – Test your luck in this high-card duel!
@@ -22,6 +27,12 @@
 - 📱 Fully responsive design
 - ⌨️ Keyboard controls support
 - 🎨 Dark mode optimized
+
+## Screenshot
+
+<div align="center">
+  <img src="/public/images/card-dual-screenshot.png" alt="ColorCraft Screenshot" width="900" />
+</div>
 
 ## Getting Started
 
