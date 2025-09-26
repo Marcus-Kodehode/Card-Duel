@@ -1,52 +1,36 @@
 @import "tailwindcss";
 
-/* Custom animations and 3D effects */
-@keyframes spin-slow {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-@keyframes glow-pulse {
-  0%,
-  100% {
-    box-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
-  }
-  50% {
-    box-shadow: 0 0 40px rgba(251, 191, 36, 0.6);
-  }
-}
-
-@keyframes shimmer {
+/* Simple, clean animations only when needed */
+@keyframes first-deal-flip {
   0% {
-    background-position: -1000px 0;
+    transform: rotateY(180deg);
+    opacity: 0;
   }
   100% {
-    background-position: 1000px 0;
+    transform: rotateY(0deg);
+    opacity: 1;
   }
 }
 
-/* Card 3D effects */
+@keyframes subtle-crown {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Card 3D - only for first deal */
 .card-scene {
   perspective: 1000px;
 }
 
 .card-3d {
   transform-style: preserve-3d;
-  transition: transform 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 300ms ease-out;
 }
 
 .card-3d.is-flipped {
@@ -55,152 +39,188 @@
 
 .card-face {
   backface-visibility: hidden;
-  will-change: transform;
 }
 
 .card-back {
   transform: rotateY(180deg);
 }
 
-/* Enhanced pop-in animation */
-@keyframes pop-in {
-  0% {
-    transform: scale(0.8) translateY(20px) rotateY(45deg);
-    opacity: 0;
-  }
-  60% {
-    transform: scale(1.05) translateY(-5px) rotateY(-5deg);
-    opacity: 0.9;
-  }
-  100% {
-    transform: scale(1) translateY(0) rotateY(0deg);
-    opacity: 1;
-  }
+/* Only animate first deal */
+.animate-first-deal {
+  animation: first-deal-flip 400ms ease-out both;
 }
 
-.animate-pop-in {
-  animation: pop-in 400ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+/* Simple winner crown that disappears quickly */
+.winner-crown {
+  animation: subtle-crown 300ms ease-out both;
 }
 
-/* Utility classes */
-.animate-spin-slow {
-  animation: spin-slow 3s linear infinite;
+/* Clean card styling to match your webp cards */
+.game-card {
+  background: linear-gradient(145deg, #fef7e0 0%, #f5ebcb 50%, #f0e4c1 100%);
+  border: 1px solid #d4af37;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.animate-float {
-  animation: float 3s ease-in-out infinite;
+.game-card.winner {
+  border-color: #fbbf24;
+  border-width: 2px;
 }
 
-.animate-glow-pulse {
-  animation: glow-pulse 2s ease-in-out infinite;
+/* Vintage game board */
+.game-board {
+  background: linear-gradient(135deg, #0f4a3c 0%, #1e5a4e 50%, #0f4a3c 100%);
+  border: 2px solid #d4af37;
 }
 
-.animate-shimmer {
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.2) 50%,
-    transparent 100%
-  );
-  background-size: 1000px 100%;
-  animation: shimmer 2s infinite;
+/* Clean stat cards */
+.stat-card {
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: transform 150ms ease-out;
 }
 
-/* Glass morphism effects */
-.glass {
-  backdrop-filter: blur(16px) saturate(180%);
-  background-color: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.125);
+.stat-card:hover {
+  transform: translateY(-1px);
 }
 
-.glass-dark {
-  backdrop-filter: blur(16px) saturate(180%);
-  background-color: rgba(17, 25, 40, 0.75);
-  border: 1px solid rgba(255, 255, 255, 0.125);
+.stat-card.emerald {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: rgba(52, 211, 153, 0.3);
+  color: #6ee7b7;
 }
 
-/* Custom scrollbar */
+.stat-card.amber {
+  background: rgba(245, 158, 11, 0.15);
+  border-color: rgba(251, 191, 36, 0.3);
+  color: #fbbf24;
+}
+
+.stat-card.red {
+  background: rgba(220, 38, 38, 0.15);
+  border-color: rgba(239, 68, 68, 0.3);
+  color: #f87171;
+}
+
+.stat-card.purple {
+  background: rgba(147, 51, 234, 0.15);
+  border-color: rgba(168, 85, 247, 0.3);
+  color: #c084fc;
+}
+
+.stat-card.blue {
+  background: rgba(37, 99, 235, 0.15);
+  border-color: rgba(59, 130, 246, 0.3);
+  color: #60a5fa;
+}
+
+/* Clean buttons */
+.btn-deal {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  border: none;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: all 150ms ease-out;
+}
+
+.btn-deal:hover:not(:disabled) {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+}
+
+.btn-deal:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(6px);
+  transition: all 150ms ease-out;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Board panels */
+.board-panel {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(6px);
+  transition: all 200ms ease-out;
+}
+
+.board-panel.winner {
+  background: rgba(251, 191, 36, 0.1);
+  border-color: rgba(251, 191, 36, 0.3);
+}
+
+/* Simple badges */
+.game-badge {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(4px);
+}
+
+.game-badge.highlight {
+  background: rgba(251, 191, 36, 0.2);
+  border-color: rgba(251, 191, 36, 0.4);
+  color: #fbbf24;
+}
+
+/* Status panel */
+.status-panel {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.status-panel.celebrating {
+  background: rgba(251, 191, 36, 0.15);
+  border-color: rgba(251, 191, 36, 0.4);
+  color: #fbbf24;
+}
+
+/* Vintage pip colors for number cards */
+.pip-black {
+  color: #374151;
+  font-weight: bold;
+}
+
+.pip-red {
+  color: #dc2626;
+  font-weight: bold;
+}
+
+/* Clean scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.5);
+  background: #d4af37;
+  border-radius: 3px;
 }
 
 /* Focus states */
-button:focus-visible,
-input:focus-visible {
-  outline: 2px solid rgba(59, 130, 246, 0.5);
+button:focus-visible {
+  outline: 2px solid #f59e0b;
   outline-offset: 2px;
 }
 
-/* Hover transitions */
-.hover-lift {
-  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
-}
-
-.hover-lift:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-}
-
-/* Text gradients */
-.text-gradient {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.text-gradient-gold {
-  background: linear-gradient(135deg, #f7931e 0%, #ffd700 50%, #ffed4a 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Card hover effects */
-.card-hover {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.card-hover:hover {
-  transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-}
-
-/* Winner effects */
-.winner-glow {
-  box-shadow: 0 0 20px rgba(251, 191, 36, 0.3), 0 0 40px rgba(251, 191, 36, 0.2),
-    0 0 60px rgba(251, 191, 36, 0.1);
-}
-
-/* Loser effects */
-.loser-fade {
-  filter: grayscale(0.3) brightness(0.8);
-}
-
-/* Responsive utilities */
+/* Responsive */
 @media (max-width: 640px) {
-  .card-scene {
-    perspective: 800px;
-  }
-}
-
-/* Smooth scrolling */
-@media (prefers-reduced-motion: no-preference) {
-  html {
-    scroll-behavior: smooth;
+  .game-board {
+    border-width: 1px;
   }
 }

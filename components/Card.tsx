@@ -60,8 +60,8 @@ export default function Card({
     : "text-slate-800 dark:text-slate-100";
 
   // English card naming convention
-  const asset = `/images/cards/${rankSlug[rank]}_of_${suitSlug[suit]}.png`;
-  const backAsset = `/images/cards/card_back.png`;
+  const asset = `/images/cards/${rankSlug[rank]}_of_${suitSlug[suit]}.webp`;
+  const backAsset = `/images/cards/card_back.webp`;
 
   useEffect(() => {
     if (winner || loser) {
